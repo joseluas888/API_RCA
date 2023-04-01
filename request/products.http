@@ -1,0 +1,59 @@
+@api = http://localhost:3000/products
+
+GET {{api}}
+
+### CREATE NEW COOLER
+
+POST {{api}}
+Content-Type: application/json
+
+{
+    "IdCooler": 777,
+    "ModeloCooler": "PepsiRefri555",
+    "Marca": "Pepsi",
+    "Identificador": "CrioTec-5555G",
+    "NumPuertas": 5,
+    "SizeCliente": "Grande",
+    "TypeDoor": "PepsiCola",
+    "PotencialVentaMensual": "255 CU promedio",
+    "CapacidadBottle": "945",
+    "LlenadoPuerta": 6,
+    "IngresoMensualCliente": 102060,
+    "GananciaMensualCliente": 28350,
+    "ConsumoEnergeticoMensual": "6.82 Kw/h",
+    "ConsumoEnergeticoDinero": 4899
+
+}
+
+### GET COOLER BY ID
+
+GET {{api}}/777
+
+### DELETE COOLER BY ID
+
+DELETE {{api}}/101
+
+### TOTAL NUM OF COOLERS
+
+GET {{api}}/count
+
+### UPDATE COOLER
+
+PUT {{api}}/777
+Content-Type: application/json
+
+{
+    "ModeloCooler": "UPDATE",
+    "Marca": "UPDATE",
+    "Identificador": "UPDATE",
+    "NumPuertas": 5,
+    "SizeCliente": "Grande",
+    "TypeDoor": "UPDATE",
+    "PotencialVentaMensual": "UPDATE",
+    "CapacidadBottle": 997,
+    "LlenadoPuerta": 6,
+    "IngresoMensualCliente": 102060,
+    "GananciaMensualCliente": 28350,
+    "ConsumoEnergeticoMensual": "99.99 Kw/h",
+    "ConsumoEnergeticoDinero": 4899
+}
