@@ -31,15 +31,12 @@ let variables = {
 };
 
 export const getProducts = async (req, res) => {
-  
   const pool = await getConnection();
   const result = await pool.request().query(queries.GetAllCoolers);
   res.json(result.recordset);
 };
 
 export const createProduct = async (req, res) => {
-  
-
   try {
     const fieldsProducts = req.body;
     if (requiredFields.every((field) => fieldsProducts[field] != null)) {
@@ -68,44 +65,42 @@ export const createProduct = async (req, res) => {
 };
 
 export const getCoolerById = async (req, res) => {
-  
-
-  const {id} = req.params
+  const { id } = req.params;
 
   const pool = await getConnection();
 
-  const result = await pool.request().input("id",id).query(queries.GetCoolerbyId);
+  const result = await pool
+    .request()
+    .input("id", id)
+    .query(queries.GetCoolerbyId);
 
-  res.send(result.recordset[0])
-}
+  res.send(result.recordset[0]);
+};
 
 export const deleteCoolerById = async (req, res) => {
-  
-  
-  const {id} = req.params
+  const { id } = req.params;
 
   const pool = await getConnection();
 
-  const result = await pool.request().input("id",id).query(queries.DeleteCoolerbyId);
+  const result = await pool
+    .request()
+    .input("id", id)
+    .query(queries.DeleteCoolerbyId);
 
   res.status(204);
-}
+};
 
 export const getTotalNumCoolers = async (req, res) => {
-
-
   const pool = await getConnection();
 
   const result = await pool.request().query(queries.GetTotalNumCoolers);
 
-  res.json(result.recordset[0][""])
-}
+  res.json(result.recordset[0][""]);
+};
 
 export const updateCoolerById = async (req, res) => {
-  
-  
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const fieldsProducts = req.body;
     if (requiredFields.every((field) => fieldsProducts[field] != null)) {
       const pool = await getConnection();
@@ -135,32 +130,49 @@ export const updateCoolerById = async (req, res) => {
 };
 
 export const getTotalOrders = async (req, res) => {
-  
   const pool = await getConnection();
 
   const result = await pool.request().query(queries.GetTotalOrders);
 
   res.json(result.recordset);
-}
+};
 
 export const getOrdersCancel = async (req, res) => {
-
   const pool = await getConnection();
 
   const result = await pool.request().query(queries.GetOrdersCancel);
 
   res.json(result.recordset);
-}
+};
 
 export const getOrdersAcepted = async (req, res) => {
-
   const pool = await getConnection();
 
   const result = await pool.request().query(queries.GetOrdersAcepted);
 
   res.json(result.recordset);
-}
+};
 
 // No desarrollados!
 
+export const updateStatusSolicitudById = async (req, res) => {
+  try {
+    const { id, status } = req.params;
 
+    const pool = await getConnection();
+
+    const result = await pool
+    .request()
+    .input("id", id)
+    .input("status", status)
+    .query(queries.UpdateStatusSolicitudById);
+
+    res.json(result);
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred on the server.");
+    res.send(error.message);
+  }
+};
+// yo te doy status al quiero llegar y el id de la solicitud a la que cambiar -> me cambia el status de la soli que quiero y me regresa "YA QUEDO"

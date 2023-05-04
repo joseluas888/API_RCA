@@ -1,5 +1,5 @@
 import {Router} from "express"
-import {createProduct, getProducts, getCoolerById, deleteCoolerById, getTotalNumCoolers, updateCoolerById, getTotalOrders, getOrdersCancel, getOrdersAcepted} from "../controllers/products.controller"
+import {createProduct, getProducts, getCoolerById, deleteCoolerById, getTotalNumCoolers, updateCoolerById, getTotalOrders, getOrdersCancel, getOrdersAcepted, updateStatusSolicitudById} from "../controllers/products.controller"
 import { verifyToken } from "../controllers/verifyToken";
 
 
@@ -22,6 +22,8 @@ router.get("/productos/totalordenes", getTotalOrders) // verifyToken
 router.get("/productos/ordenescancel", getOrdersCancel) // verifyToken
 
 router.get("/productos/ordenesaceptadas", getOrdersAcepted)
+
+router.put("/productos/UpdateSolicitudById/:id/:status", updateStatusSolicitudById)
 
 // No están implementados
 // router.get("/productos/:id/productos", verifyToken, getOrdersById) // !!

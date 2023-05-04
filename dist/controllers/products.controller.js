@@ -4,7 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateCoolerById = exports.getTotalOrders = exports.getTotalNumCoolers = exports.getProducts = exports.getOrdersCancel = exports.getOrdersAcepted = exports.getCoolerById = exports.deleteCoolerById = exports.createProduct = void 0;
+exports.updateStatusSolicitudById = exports.updateCoolerById = exports.getTotalOrders = exports.getTotalNumCoolers = exports.getProducts = exports.getOrdersCancel = exports.getOrdersAcepted = exports.getCoolerById = exports.deleteCoolerById = exports.createProduct = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -325,3 +325,40 @@ var getOrdersAcepted = /*#__PURE__*/function () {
 
 // No desarrollados!
 exports.getOrdersAcepted = getOrdersAcepted;
+var updateStatusSolicitudById = /*#__PURE__*/function () {
+  var _ref10 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee10(req, res) {
+    var _req$params, id, status, pool, result;
+    return _regenerator["default"].wrap(function _callee10$(_context10) {
+      while (1) switch (_context10.prev = _context10.next) {
+        case 0:
+          _context10.prev = 0;
+          _req$params = req.params, id = _req$params.id, status = _req$params.status;
+          _context10.next = 4;
+          return (0, _database.getConnection)();
+        case 4:
+          pool = _context10.sent;
+          _context10.next = 7;
+          return pool.request().input("id", id).input("status", status).query(_database.queries.UpdateStatusSolicitudById);
+        case 7:
+          result = _context10.sent;
+          res.json(result);
+          _context10.next = 16;
+          break;
+        case 11:
+          _context10.prev = 11;
+          _context10.t0 = _context10["catch"](0);
+          console.error(_context10.t0);
+          res.status(500).send("An error occurred on the server.");
+          res.send(_context10.t0.message);
+        case 16:
+        case "end":
+          return _context10.stop();
+      }
+    }, _callee10, null, [[0, 11]]);
+  }));
+  return function updateStatusSolicitudById(_x19, _x20) {
+    return _ref10.apply(this, arguments);
+  };
+}();
+// yo te doy status al quiero llegar y el id de la solicitud a la que cambiar -> me cambia el status de la soli que quiero y me regresa "YA QUEDO"
+exports.updateStatusSolicitudById = updateStatusSolicitudById;

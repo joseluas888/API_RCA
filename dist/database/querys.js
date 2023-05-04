@@ -24,7 +24,7 @@ var queries = {
   GetBestSeller: "select D.IdEmpleado, D.FnameEmpleado, D.LnameEmpleado, isnull(S.[Solicitudes Aceptadas], 0) as 'Solicitudes Aceptadas' from Desarrollador D left join ( select IdDesarrollador, count(*) as 'Solicitudes Aceptadas' from Solicitud where StatusSolicitud = 'Aceptada' or StatusSolicitud = 'Pendiente' or StatusSolicitud = 'Completada' group by IdDesarrollador ) S on D.IdEmpleado = S.IdDesarrollador",
   GetCredencialesAuth: "select perfil, username, contraseña, d.IdEmpleado as IdDesarrollador, a.IdEmpleado as IdAdmin, c.IdEmpleado as IdChofer from Usuarios u full outer join Desarrollador d on u.IdUsuario = d.IdUsuario full outer join Admin a on u.IdUsuario = a.IdUsuario full outer join Chofer c on u.IdUsuario = c.IdUsuario where username = @username and contraseña = @password",
   GetOrdersAcepted: "SELECT Solicitud.IdSolicitud, FechaSolicitud, StatusSolicitud, COUNT(CoolerSolicitado.IdCS) AS 'Cantidad de Coolers' FROM Solicitud JOIN CoolerSolicitado ON Solicitud.IdSolicitud = CoolerSolicitado.IdSolicitud WHERE StatusSolicitud = 'Aceptada' GROUP BY Solicitud.IdSolicitud, FechaSolicitud, StatusSolicitud ORDER BY FechaSolicitud DESC",
-  xxx: ""
+  UpdateStatusSolicitudById: "Update Solicitud set StatusSolicitud = @status where IdSolicitud = @id"
   // No desarrollados!
   // GetCredencialesAuth es : @username y @password
 };

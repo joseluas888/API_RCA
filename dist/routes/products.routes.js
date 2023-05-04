@@ -19,6 +19,7 @@ router.get("/productos/totalordenes", _products.getTotalOrders); // verifyToken
 router.get("/productos/ordenescancel", _products.getOrdersCancel); // verifyToken
 
 router.get("/productos/ordenesaceptadas", _products.getOrdersAcepted);
+router.put("/productos/UpdateSolicitudById/:id/:status", _products.updateStatusSolicitudById);
 
 // No están implementados
 // router.get("/productos/:id/productos", verifyToken, getOrdersById) // !!
